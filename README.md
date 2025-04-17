@@ -1,21 +1,26 @@
 # HvA TouchDesigner en het Immersive Lab
-This repository is intended for the users of the Immersive Lab at the Hogeschool van Amsterdam (HvA). 
-The templates and code in this repository are free to use for Students and Staff of the HvA; this includes commercial use. Other users should stick to the Creative Commons Attribution-NonCommercial 4.0 International license.
+Deze repository is bedoeld voor de gebruikers van het Immersive Lab van de Hogeschool van Amsterdam (HvA). De templates en code in deze repository zijn vrij te gebruiken voor studenten en medewerkers van de HvA, ook voor commercieel gebruik. Andere gebruikers moeten zich houden aan de Creative Commons Attribution-NonCommercial 4.0 International-licentie.
 
-The template has several blocks with ready to use components. Each component should have a description on what it does.
+De template bevat verschillende blokken met kant-en-klare componenten. Elke component moet voorzien zijn van een beschrijving van wat deze doet.
 
-The SandBox folder contains several examples of interaction  components that can be reused in the main template.
+De map SandBox bevat verschillende voorbeelden van interactieve componenten die hergebruikt kunnen worden in de hoofdtemplate.
+
+
+
+
 
 
 ## Zig Sim App
 
-Zig sim app is a third party app  that can be used to use the sensors of a smartphone as data input to modify content.
+De Zig Sim App is een app van derden waarmee de sensoren van een smartphone gebruikt kunnen worden als data-input om content aan te passen.
 
-The pro version, aka payed version, allows to use Face an body recognition using ArKit; it also provides functionality to use the depth camera of the smart phone.
+De Pro-versie (betaalde versie) biedt extra functies zoals gezichts- en lichaamsherkenning via ARKit, en maakt het mogelijk om de dieptecamera van de smartphone te gebruiken.
 
-The app requires to stablish communication using OSC between the mobile device and the computer.
+De app vereist communicatie via OSC (Open Sound Control) tussen het mobiele apparaat en de computer.
 
-Here is documentation of the app https://1-10.github.io/zigsim/getting-started.html
-Here are some tutorials on the basic set up using TouchDesigner: 
+Hier is de documentatie van de app:
+https://1-10.github.io/zigsim/getting-started.html
+
+En hier vind je een aantal tutorials voor de basisinstellingen met TouchDesigner:
 https://youtu.be/pwwuZj8KK6M?si=1FDtNI06D6hz5EgV
 https://youtu.be/dfKfVJfy7SI?si=m3RAjZf14sFxH8wb
