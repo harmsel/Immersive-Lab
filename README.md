@@ -16,26 +16,6 @@ The pro version, aka payed version, allows to use Face an body recognition using
 The app requires to stablish communication using OSC between the mobile device and the computer.
 
 Here is documentation of the app https://1-10.github.io/zigsim/getting-started.html
-
 Here are some tutorials on the basic set up using TouchDesigner: 
-
 https://youtu.be/pwwuZj8KK6M?si=1FDtNI06D6hz5EgV
-
 https://youtu.be/dfKfVJfy7SI?si=m3RAjZf14sFxH8wb
-
-### Depth Camera
-
-The pro version also allows you to use your smartphone's depth camera. 
-
-Set up:
-Make sure the NDI SDK is installed on your computer. You can download it from here. https://ndi.video/download-ndi-sdk/
-
-Once the SDK is installed, follow the following steps:
-* Make sure your phone and computer are on the same network. At the University, you must create a hotspot for communication to work.
-* Get the IP address of your phone.
-* Selecting the NDI sensor in the Zif Sim app and click start.
-  * Select the world option on the NDI options.
-* Add the NDI In TOP to your TouchDesigner network.
-  * Write the IP of your phone on the "Extra Search IPs."
-  * Your phone should now be selectable on the Source field. By selecting it, you should see the image.
-  * The depth info is coded in the alpha channel. Use a Chamix TOP to extract it; follow https://youtu.be/dfKfVJfy7SI?si=m3RAjZf14sFxH8wb for more details. 
