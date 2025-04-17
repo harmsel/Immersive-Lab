@@ -1,4 +1,4 @@
-# HvA_Immersive_Lab
+# HvA TouchDesigner en het Immersive Lab
 This repository is intended for the users of the Immersive Lab at the Hogeschool van Amsterdam (HvA). 
 The templates and code in this repository are free to use for Students and Staff of the HvA; this includes commercial use. Other users should stick to the Creative Commons Attribution-NonCommercial 4.0 International license.
 
