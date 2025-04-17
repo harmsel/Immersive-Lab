@@ -8,6 +8,8 @@ De map SandBox bevat verschillende voorbeelden van interactieve componenten die 
 
 
 
+## Gebruik van Arduino als input
+De template heeft standaard onderdelen waardoor je alles kunt aansturen vanuit een arduino. De TD template gebruikt de seriele waarde om het beeld of geluid te beinvloeden. De Basisopzet werkt met een afstandsensor. Maar je kunt met elke sensor waarvan je de waarde via de serial monitor kan zien, aansluiten.
 
 
 ## Zig Sim App
