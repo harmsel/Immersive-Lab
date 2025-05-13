@@ -1,17 +1,15 @@
-#include <HCSR04.h>
+#include <NewPing.h>  // Zoek de library "NewPing" (van Tim Eckel) en installeer deze
 
-HCSR04 hc(2, 3);  //trigger op 2, echo op 3. Ik heb een Arduino UNO gebruikt, maar dit werkt ook op je NodeMCU
-int afstand;
+#define PIN 6             // Sluit de Sensor aan op D6
+#define MAX_DISTANCE 200  // Maximale meetafstand, wil je minder ver meten? Maak dan deze max_distance kleiner om je respons tijd van je sensor te verhogen
+NewPing sonar(PIN, PIN, MAX_DISTANCE);  // Pin komt twee keer voor, want de eerste is voor de trigger de tweede voor de echo
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(9600);  // Open serial monitor op 9600
 }
 
 void loop() {
-
-  afstand = hc.dist();
-  delay(100);
-
-  if (afstand > 4 && afstand < 220) // de sensor werkt alleen betrouwbaar tussen deze afstanden
-    Serial.println(afstand / 50);  //ik deel de afstand door 50. Dan krijg je in Touchdesinger 1, 2, 3 of 4 binnen. Dan kun je op deze afstanden (elke keer 50 cm verder) een beeld/geluid triggeren
+  long afstand = sonar.ping_cm();
+  Serial.println(afstand);
+  delay(50);  // 50 ms tussen metingen. 29 ms is minimaal
 }
