@@ -1,56 +1,54 @@
-#include <ESP8266WiFi.h>
-#include <WiFiUdp.h>
+#include <Adafruit_NeoPixel.h>
 
-const char* ssid = "hutspot";
-const char* password = "88888888";
+// Instellingen SK6812 (Pin A0)
+#define PIN_SK A0
+#define NUM_SK 30
 
-const char* tdIP = "10.107.217.174";  // IP van je PC met TouchDesigner
-const int tdPort = 7000;              // Poort die je in TD gebruikt
+// Instellingen WS2812B (Pin A1)
+#define PIN_WS A1
+#define NUM_WS 30
 
+// Initialiseer beide strips
+// SK6812 gebruikt NEO_GRBW (4 kleuren per led)
+Adafruit_NeoPixel stripSK(NUM_SK, PIN_SK, NEO_GRBW + NEO_KHZ800);
 
-WiFiUDP udp;
-
-const int buttonPin = D1;  // D1
-bool lastButtonState = HIGH;
-bool buttonPressed = false;
-unsigned long lastDebounceTime = 0;
-const unsigned long debounceDelay = 50;
+// WS2812B gebruikt NEO_GRB (3 kleuren per led)
+Adafruit_NeoPixel stripWS(NUM_WS, PIN_WS, NEO_GRB + NEO_KHZ800);
 
 void setup() {
-  Serial.begin(115200);
-  pinMode(buttonPin, INPUT_PULLUP);
+  stripSK.begin();
+  stripWS.begin();
 
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-  Serial.println("WiFi verbonden: " + WiFi.localIP().toString());
+  stripSK.setBrightness(255);// max is 255
+  stripWS.setBrightness(255);
+
+  stripSK.show();
+  stripWS.show();
 }
 
+
 void loop() {
-  bool reading = digitalRead(buttonPin);
+  // Effect op de SK6812 (A0) - inclusief WIT
+  colorChase(&stripSK, stripSK.Color(255, 0, 0, 0), 100);
+  colorChase(&stripSK, stripSK.Color(0, 255, 0, 0), 100);
+  colorChase(&stripSK, stripSK.Color(0, 0, 255, 0), 100);
+  colorChase(&stripSK, stripSK.Color(0, 0, 0, 255), 100);
+  colorChase(&stripSK, stripSK.Color(255, 255, 255, 255), 100);
 
-  if (reading != lastButtonState) {
-    lastDebounceTime = millis();
+
+  // Effect op de WS2812B (A1) - Alleen RGB
+  colorChase(&stripWS, stripWS.Color(255, 0, 0), 100);
+  colorChase(&stripWS, stripWS.Color(0, 255, 0), 100);
+  colorChase(&stripWS, stripWS.Color(0, 0, 255), 100);
+  colorChase(&stripWS, stripWS.Color(255, 255, 255), 100);
+}
+
+// Een universele functie die beide soorten strips kan aansturen
+void colorChase(Adafruit_NeoPixel *s, uint32_t color, int wait) {
+  for (int i = 0; i < s->numPixels(); i++) {
+    s->setPixelColor(i, color);
+    s->show();
+    delay(wait);
+    s->setPixelColor(i, 0);
   }
-
-
-
-    if (reading == LOW ) {  // Valt van HIGH naar LOW (ingedrukt)
-      udp.beginPacket(tdIP, tdPort);
-      udp.write("1\n");  // deze waarde gaat naar TD
-      udp.endPacket();
-
-      Serial.println("Knop gedrukt");
-    } else if (reading == HIGH) {
-      udp.beginPacket(tdIP, tdPort);
-      udp.write("0\n");  // Deze waarde gaat naar TouchDesigner
-      udp.endPacket();
-
-    }
-
-
-  lastButtonState = reading;
-  delay(50);
 }
