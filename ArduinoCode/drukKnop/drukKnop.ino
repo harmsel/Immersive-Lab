@@ -1,4 +1,4 @@
-const int buttonPin = 3;  // verbind de knop tussen GND en deze pin. VOor UNO is dat D3
+const int buttonPin = 3;  // verbind de knop tussen GND en deze pin. VOor UNO is dat D2
 const int ledPin = 13;
 
 

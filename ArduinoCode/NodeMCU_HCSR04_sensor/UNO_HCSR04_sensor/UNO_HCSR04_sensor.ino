@@ -1,4 +1,4 @@
-#include <HCSR04.h>
+x#include <HCSR04.h>
 
 HCSR04 hc(2, 3);  //trigger op 2, echo op 3. Ik heb een Arduino UNO gebruikt, maar dit werkt ook op je NodeMCU
 int afstand;
