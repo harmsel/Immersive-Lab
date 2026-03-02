@@ -4,20 +4,22 @@
 const char* ssid = "hutspot";
 const char* password = "88888888";
 
-const char* tdIP = "10.107.217.174";  // IP van je PC met TouchDesigner
+const char* tdIP = "10.107.217.174";  // IP van je PC met TouchDesigner (jouw IP nummer kun je vinden, vraag internet even ;-)
 const int tdPort = 7000;              // Poort die je in TD gebruikt
 
 
 WiFiUDP udp;
 
-const int buttonPin = D1;  // D1
+const int buttonPin = D1;  // !!!! knop verbinden: op de knop VCC en OUT. Die maak je aan GND en D1 op de NodeMCU
 bool lastButtonState = HIGH;
 bool buttonPressed = false;
 unsigned long lastDebounceTime = 0;
 const unsigned long debounceDelay = 50;
 
 void setup() {
+
   Serial.begin(115200);
+      Serial.println(".");
   pinMode(buttonPin, INPUT_PULLUP);
 
   WiFi.begin(ssid, password);
