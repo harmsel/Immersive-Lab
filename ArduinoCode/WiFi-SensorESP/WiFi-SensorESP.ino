@@ -1,16 +1,16 @@
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
 
-const char* ssid = "hutspot";
+const char* ssid = "hutspot";//GEEN SPATIES gebruiken
 const char* password = "88888888";
 
 const char* tdIP = "10.71.28.174";  // IP van je PC met TouchDesigner (jouw IP nummer kun je vinden, vraag internet even ;-)
-const int tdPort = 7000;              // Poort die je in TD gebruikt
+const int tdPort = 7000;              // Dit zo laten, staat in TD al goed
 
 
 WiFiUDP udp;
 
-const int buttonPin = D1;  // !!!! knop verbinden: op de knop VCC en OUT. Die maak je aan GND en D1 op de NodeMCU
+const int buttonPin = D1;  // !!!! draadjes verbinden: op de knop VCC en OUT. Die maak je aan GND en D1 op de NodeMCU
 bool lastButtonState = HIGH;
 bool buttonPressed = false;
 unsigned long lastDebounceTime = 0;
