@@ -1,11 +1,11 @@
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
 
-const char* ssid = "hutspot";//GEEN SPATIES gebruiken
+const char* ssid = "hutspot";  //GEEN SPATIES gebruiken
 const char* password = "88888888";
 
 const char* tdIP = "10.71.28.174";  // IP van je PC met TouchDesigner (jouw IP nummer kun je vinden, vraag internet even ;-)
-const int tdPort = 7000;              // Dit zo laten, staat in TD al goed
+const int tdPort = 7000;            // Dit zo laten, staat in TD al goed
 
 
 WiFiUDP udp;
@@ -19,7 +19,7 @@ const unsigned long debounceDelay = 50;
 void setup() {
 
   Serial.begin(115200);
-      Serial.println(".");
+  Serial.println(".");
   pinMode(buttonPin, INPUT_PULLUP);
 
   WiFi.begin(ssid, password);
@@ -30,6 +30,7 @@ void setup() {
   Serial.println("WiFi verbonden: " + WiFi.localIP().toString());
 }
 
+
 void loop() {
   bool reading = digitalRead(buttonPin);
 
@@ -37,22 +38,37 @@ void loop() {
     lastDebounceTime = millis();
   }
 
+  udp.beginPacket(tdIP, tdPort);
+  udp.write("9\n");
+  udp.endPacket();
+  delay(200);
 
 
-    if (reading == LOW ) {  // Valt van HIGH naar LOW (ingedrukt)
-      udp.beginPacket(tdIP, tdPort);
-      udp.write("1\n");  // deze waarde gaat naar TD
-      udp.endPacket();
+  udp.beginPacket(tdIP, tdPort);
+  udp.write("44444\n");
+  udp.endPacket();
+  delay(200);
 
-      Serial.println("Knop gedrukt");
-    } else if (reading == HIGH) {
-      udp.beginPacket(tdIP, tdPort);
-      udp.write("0\n");  // Deze waarde gaat naar TouchDesigner
-      udp.endPacket();
+  if ((millis() - lastDebounceTime) > debounceDelay) {
 
+    if (reading != buttonPressed) {
+      buttonPressed = reading;
+
+      if (buttonPressed == LOW) {
+        udp.beginPacket(tdIP, tdPort);
+        udp.write("1\n");
+        udp.endPacket();
+
+        Serial.println("Knop gedrukt");
+      } else {
+        udp.beginPacket(tdIP, tdPort);
+        udp.write("0\n");
+        udp.endPacket();
+
+        Serial.println("Knop los");
+      }
     }
-
+  }
 
   lastButtonState = reading;
-  delay(50);
 }
